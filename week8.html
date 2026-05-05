@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 Progress: Administrative Integration & Final Review | JB Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; font-family: Poppins, sans-serif; }
+        
+        .article-text {
+            line-height: 1.8;
+            color: #374151;
+            font-size: 1.125rem;
+        }
+
+        /* Slide in from right to left */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Slide out from left to right */
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .animate-slide-in {
+            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-slide-out {
+            animation: slideOutRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+
+    <div id="page-wrapper" class="min-h-screen flex flex-col animate-slide-in">
+        
+        <header class="w-full border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
+            <div class="max-w-screen-md mx-auto px-6 h-16 flex items-center justify-between">
+                <button onclick="navigateBack()" class="text-emerald-700 font-bold flex items-center gap-2 hover:opacity-70 transition group px-2 py-1 rounded-lg hover:bg-emerald-50 relative z-10">
+                    <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                    Back to Home
+                </button>
+                <div class="text-sm font-bold text-gray-400 uppercase tracking-widest">Article</div>
+            </div>
+        </header>
+
+        <main class="flex-1 max-w-screen-md mx-auto px-6 py-12 md:py-20 w-full">
+            
+            <header class="mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                    Administrative Integration & Final Review
+                </h1>
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold">
+                        JB
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-sm font-bold text-gray-900">James Benedict</span>
+                        <span class="text-xs text-gray-500">April 14, 2026</span>
+                    </div>
+                    <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 8</span>
+                </div>
+            </header>
+
+            <div class="space-y-10">
+                
+                <div class="article-text whitespace-pre-line">
+                    During Week 8, we focused heavily on organizational restructuring and refining the user experience of the Learning Management System (LMS). A key highlight was the successful introduction of a new administrative role for the Curriculum Implementation Division (CID). This update decentralizes our content management workflow by allowing specialized staff to independently handle module creation, material uploading, and assessment evaluation, which significantly improves the operational efficiency of the division.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week8/pic1.png" alt="CID Role Management View" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">New administrative roles integrated for the CID staff.</figcaption>
+                </figure>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week8/pic2.png" alt="System Email Branding" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Managing materials by the CID.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    In addition to the restructuring, we focused on hardening system security. We identified and successfully patched authorization issues specifically associated with the CID role, ensuring that access levels are strictly enforced and that sensitive administrative tools remain protected. I also finalized our custom email layout templates. This ensures that every system-generated notification maintains a cohesive, professional branding consistent with official Department of Education standards.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week8/pic3.png" alt="System Email Branding" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Finalized branding for official system-generated email templates.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    As we stand at an 80% completion milestone, our administrative hierarchy is finally stable. Our primary focus is now shifting toward the formal presentation to the Information Technology Officer (ITO) and the Schools Division Superintendent (SDS). We aim to demonstrate the full capabilities of the LMS to leadership, ensuring we incorporate their final feedback as we enter the polishing phase of the project.
+                </div>
+
+            </div>
+
+            <footer class="mt-20 pt-10 border-t border-gray-100 flex flex-col items-center">
+                <p class="text-gray-400 text-sm mb-6 text-center">Thank you for reading! If you enjoyed this article, check out my other projects.</p>
+                <button onclick="navigateBack()" class="px-8 py-3 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition shadow-lg shadow-emerald-100">
+                    Explore More Articles
+                </button>
+            </footer>
+        </main>
+
+        <footer class="py-10 text-center text-gray-400 text-xs mt-auto">
+            &copy; 2026 JB Portfolio. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        function navigateBack() {
+            const wrapper = document.getElementById('page-wrapper');
+
+            wrapper.classList.remove('animate-slide-in');
+            wrapper.classList.add('animate-slide-out');
+
+            setTimeout(() => {
+                window.location.href = "javascript:history.back()";
+            }, 300); // Matches the slideOutRight animation duration
+        }
+    </script>
+</body>
+</html>

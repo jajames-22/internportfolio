@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Progress: Database Migration & Rerouting | JB Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; font-family: Poppins, sans-serif; }
+        
+        .article-text {
+            line-height: 1.8;
+            color: #374151;
+            font-size: 1.125rem;
+        }
+
+        /* Slide in from right to left */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Slide out from left to right */
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .animate-slide-in {
+            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-slide-out {
+            animation: slideOutRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+
+    <div id="page-wrapper" class="min-h-screen flex flex-col animate-slide-in">
+        
+        <header class="w-full border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
+            <div class="max-w-screen-md mx-auto px-6 h-16 flex items-center justify-between">
+                <button onclick="navigateBack()" class="text-emerald-700 font-bold flex items-center gap-2 hover:opacity-70 transition group px-2 py-1 rounded-lg hover:bg-emerald-50 relative z-10">
+                    <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                    Back to Home
+                </button>
+                <div class="text-sm font-bold text-gray-400 uppercase tracking-widest">Article</div>
+            </div>
+        </header>
+
+        <main class="flex-1 max-w-screen-md mx-auto px-6 py-12 md:py-20 w-full">
+            
+            <header class="mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                    Database Migration & Role-Based Access
+                </h1>
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold">
+                        JB
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-sm font-bold text-gray-900">James Benedict</span>
+                        <span class="text-xs text-gray-500">March 3, 2026</span>
+                    </div>
+                    <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 2</span>
+                </div>
+            </header>
+
+            <div class="space-y-10">
+                
+                <div class="article-text whitespace-pre-line">
+                    The second week of my internship was pivotal for our Learning Management System (LMS) development. We shifted our focus from initial prototyping to ensuring backend stability and user accessibility. A major technical undertaking this week was migrating our entire database system from PostgreSQL to XAMPP (MySQL) to ensure total server compatibility for the DepEd Zamboanga City Division infrastructure.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week2/pic1.png" alt="Database Migration Process" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Database migration from PostgreSQL to XAMPP.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    The migration process brought several schema incompatibilities and routing conflicts, including Error 500 pages during attempts to access role-based dashboards. I addressed these by meticulously reconfiguring database connection strings and updating our middleware logic. With these errors resolved, I successfully implemented role-based rerouting, which automatically directs users to specific, secure dashboards based on their assigned permissions.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week2/pic2.png" alt="Responsive Dashboard UI" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Refining UI responsiveness with Tailwind CSS.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    Beyond the backend, I managed the integration of multiple school profiles into the database and applied Tailwind CSS fixes to ensure the system is fully responsive across all devices. These efforts helped us reach a 15% completion milestone for the project. I also led team sessions to resolve complex Git merge conflicts, which provided a great opportunity to improve our team's version control workflow and technical communication.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week2/pic3.png" alt="Responsive Dashboard UI" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Error 500 in our program.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    This week reinforced that system interoperability and environment alignment are just as critical as the core code. Applying these database management and software engineering theories has been excellent preparation for my goal of becoming a Full-Stack Developer. I am looking forward to developing the Computer-Based Assessment (CBA) system next week.
+                </div>
+
+            </div>
+
+            <footer class="mt-20 pt-10 border-t border-gray-100 flex flex-col items-center">
+                <p class="text-gray-400 text-sm mb-6 text-center">Thank you for reading! If you enjoyed this article, check out my other projects.</p>
+                <button onclick="navigateBack()" class="px-8 py-3 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition shadow-lg shadow-emerald-100">
+                    Explore More Articles
+                </button>
+            </footer>
+        </main>
+
+        <footer class="py-10 text-center text-gray-400 text-xs mt-auto">
+            &copy; 2026 JB Portfolio. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        function navigateBack() {
+            const wrapper = document.getElementById('page-wrapper');
+
+            wrapper.classList.remove('animate-slide-in');
+            wrapper.classList.add('animate-slide-out');
+
+            setTimeout(() => {
+                window.location.href = "javascript:history.back()";
+            }, 300); // Matches the slideOutRight animation duration
+        }
+    </script>
+</body>
+</html>

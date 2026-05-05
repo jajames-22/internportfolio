@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JB Intern Portfolio | DepEd Zamboanga</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        *{
+            scroll-behavior: smooth;
+            font-family: Poppins, sans-serif;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+        
+        /* Infinite Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: -3s; 
+        }
+
+        /* Loading Screen Styles */
+        #loader {
+            transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+        }
+        .fade-text {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+        .fade-text.show {
+            opacity: 1;
+        }
+
+        /* Scroll Reveal Animation Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white overflow-hidden">
+
+    <div id="loader" class="fixed inset-0 z-[100] bg-emerald-500 flex flex-col justify-center items-center text-white">
+        <h1 id="loader-hi" class="fade-text text-6xl font-bold ">Hi!</h1>
+        <div id="loader-msg" class="fade-text flex flex-col items-center">
+            <h2 class="text-2xl md:text-4xl mb-4 leading-none max-w-3xl"> <span class="inline-block mb-4">You are viewing</span> <br/> <strong class="text-4xl md:text-5xl">James Benedict </strong> <br/> <strong>Internship Portfolio</strong></h2>
+            <p class="text-emerald-100 text-lg animate-pulse mt-4 font-medium tracking-widest uppercase">Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        if (performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+            document.getElementById('loader').style.display = 'none';
+            document.body.classList.remove('overflow-hidden');
+        }
+    </script>
+
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-emerald-500 z-[60] w-0 transition-all duration-75"></div>
+
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent">
+        <nav id="nav-menu" class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between my-3 transition-all">
+            <div class="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                JB.PORTFOLIO
+            </div>
+
+            <ul class="hidden md:flex space-x-8 text-gray-600 font-medium">
+                <li><a href="#" class="hover:text-emerald-600 transition">Home</a></li>
+                <li><a href="#articles" class="hover:text-emerald-600 transition">Journey</a></li>
+                <li><a href="#projects" class="hover:text-emerald-600 transition">Projects</a></li>
+            </ul>
+
+            <button id="menu-btn" class="md:hidden text-gray-600 focus:outline-none transition-transform active:scale-90">
+                <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out border-b border-white/20 bg-white/90 backdrop-blur-md">
+            <div class="px-6 py-8 space-y-4 pt-0 mt-4">
+                <a href="#" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">Home</a>
+                <a href="#articles" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">Journey</a>
+                <a href="#projects" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">Projects</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="pt-26 pb-16 px-16 bg-linear-to-b from-emerald-50 to-white overflow-hidden min-h-screen flex items-center">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+                
+                <div class="text-left z-10 reveal">
+                    <span class="inline-block px-4 py-1.5 mb-4 md:mb-6 text-xs md:text-sm font-semibold tracking-wide text-emerald-600 uppercase bg-emerald-100 rounded-full">
+                        DepEd Zamboanga City Division
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-4 md:mb-6 tracking-tight leading-none">
+                        James Benedict <br/>
+                        <span class="text-emerald-600">Internship Journey</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-600 max-w-xl mb-8 md:mb-10 leading-relaxed">
+                        Hi, I'm JB. Welcome to my portfolio documenting my IT internship experience at the Department of Education - Zamboanga City Division. Here, I share the systems I've helped build, challenges I've solved, and my overall growth as a developer.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4">
+                        <a href="#articles" class="px-8 py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-gray-800 transition shadow-lg shadow-gray-200 text-center flex items-center justify-center">
+                            View My Work
+                        </a>
+                        
+                        <form id="search-form" class="flex flex-col sm:flex-row w-full sm:w-auto shadow-sm sm:shadow-none rounded-xl overflow-hidden">
+                            <input type="text" id="search-input" name="search" 
+                                placeholder="Search logs..." 
+                                class="px-6 py-4 bg-white border border-gray-200 text-gray-700 sm:rounded-l-xl sm:rounded-tr-none font-medium focus:ring-1 focus:ring-emerald-500 outline-none transition w-full sm:w-48 border-b-0 sm:border-b sm:border-r-0">
+                            <button type="submit" class="px-6 py-4 bg-emerald-600 text-white sm:rounded-r-xl sm:rounded-bl-none font-bold hover:bg-emerald-700 transition">
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="relative w-full max-w-[280px] sm:max-w-none mx-auto h-[300px] sm:h-[400px] lg:h-[550px] mt-12 lg:mt-0 flex justify-center items-center reveal" style="transition-delay: 200ms;">
+
+                    <div class="h-100 w-100 rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.5)_0%,rgba(16,185,129,0)_70%)] blur-2xl absolute"></div>
+                    
+                    <div class="absolute top-0 right-0 md:right-12 w-40 h-56 sm:w-48 sm:h-64 md:w-64 md:h-80 rounded-2xl shadow-2xl border-4 border-white z-10 animate-float transition-transform duration-500 hover:z-30 group cursor-pointer">
+                        <div class="w-full h-full overflow-hidden rounded-xl rotate-6 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300">
+                            <img src="pictures/using-laptop.jpg" alt="Working on code" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-emerald-900/20 group-hover:bg-transparent transition duration-300"></div>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-0 left-0 md:left-12 w-40 h-56 sm:w-48 sm:h-64 md:w-64 md:h-80 rounded-2xl shadow-2xl border-4 border-white z-20 animate-float-delayed transition-transform duration-500 hover:z-30 group cursor-pointer">
+                        <div class="w-full h-full overflow-hidden rounded-xl -rotate-6 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300">
+                            <img src="pictures/rojas_pic.jpg" alt="Office environment" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-300"></div>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-72 sm:h-72 bg-emerald-300/30 rounded-full blur-3xl -z-10"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="articles" class="py-16 px-6 max-w-7xl mx-auto">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4 reveal">
+                <div>
+                    <h2 class="text-3xl pt-5 font-bold text-gray-900 mb-2">
+                        Internship Logs
+                    </h2>
+                    <p class="text-gray-500">Weekly reports, insights, and milestones at DepEd.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="articles-grid">
+                <a href="week1.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week1/pic1.jpg" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        DepEd Zambo welcomed us; we got recruited.
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        The first week of my internship at the Department of Education – Zamboanga City Division has been an incredible start. Stepping into the ICT Unit, I was immediately immersed in a mission-critical project: developing a centralized Learning Management System (LMS) for the division to facilitate the distribution of accessible learning materials.
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Feb 19, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 1</span>
+                    </div>
+                </a>
+
+                <a href="week2.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 100ms;">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week2/pic2.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Database Migration & Role-Based Access
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        The second week of my internship was pivotal for our Learning Management System (LMS) development. We shifted our focus from initial prototyping...
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Mar 3, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 2</span>
+                    </div>
+                </a>
+
+                <a href="week3.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 200ms;">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week3/pic1.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Advancing LMS Functionality & Security
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        During my third week, I shifted my focus toward the core administrative and student-facing functionalities of our Learning Management System...
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Mar 10, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 3</span>
+                    </div>
+                </a>
+
+                <a href="week4.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week4/pic1.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Refining Student Experience & Assessment Analytics
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        During the fourth week of my internship, we achieved a significant milestone, reaching 40% completion of the Learning Management System (LMS) project. My primary focus was on refining the student-facing modules. I designed the Explore Page template and implemented critical optimizations to our Computer-Based Assessment (CBA) system. 
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Mar 17, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 4</span>
+                    </div>
+                </a>
+
+                <a href="week5.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 100ms;">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week5/pic2.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Advancing LMS Security & System Flexibility
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                         Week 5 marked a major milestone as our project reached 50% completion. My focus during this period was enhancing the security and flexibility of the Learning Management System (LMS). We successfully integrated a "3-chance pause" feature for assessment exams.
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Mar 24, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 5</span>
+                    </div>
+                </a>
+
+                <a href="week6.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 200ms;">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week6/pic1.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Finalizing Educational Experience & Admin Controls
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        This week, we achieved a significant 65% completion milestone for our LMS project. My primary focus was finalizing the core educational flow within the Study Module. I ensured a seamless transition for students between content sections, 
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Mar 31, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 6</span>
+                    </div>
+                </a>
+
+                <a href="week7.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week7/pic1.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Dynamic Criteria Builder & Notification System
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        During the seventh week of my internship, we reached a significant milestone: 75% completion of the Learning Management System. My efforts were primarily dedicated to reinforcing our backend architecture by introducing intelligent, automated features.
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Apr 7, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 7</span>
+                    </div>
+                </a>
+
+                <a href="week8.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 100ms;">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week8/pic1.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Administrative Integration & Final Review
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        During Week 8, we focused heavily on organizational restructuring and refining the user experience of the Learning Management System (LMS)...
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Apr 14, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 8</span>
+                    </div>
+                </a>
+
+                <a href="week9.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 200ms;">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week9/pic1.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Platform Refinement & System Polish
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        During Week 9, we shifted our focus from feature expansion to system refinement and stability. While our formal presentation to the ITO...
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Apr 21, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 9</span>
+                    </div>
+                </a>
+
+                <a href="week10.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
+                        <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
+                            <img src="pictures/week10/pic2.jpg" alt="">
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
+                        Formal System Evaluation & Presentation
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
+                        Week 10 was undoubtedly the highlight of my internship. We held our formal system presentation at the Curriculum Implementation Division...
+                    </p>
+                    
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                        <span>Apr 28, 2026</span>
+                        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 10</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <section id="projects" class="py-12 px-6 max-w-7xl mx-auto mb-16">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4 reveal">
+                <div>
+                    <h2 class="text-3xl pt-10 font-bold text-gray-900 mb-2">
+                        Project Repository
+                    </h2>
+                    <p class="text-gray-500">Repository link for DepEd LMS.</p>
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-600 to-red-800 text-white shadow-2xl shadow-red-900/20 group reveal" style="transition-delay: 150ms;">
+                
+                <div class="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none transition-transform duration-700 group-hover:scale-150"></div>
+                <div class="absolute bottom-0 left-0 -mb-16 -ml-16 w-64 h-64 bg-black/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative p-8 md:p-12 lg:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12">
+                    <div class="max-w-2xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-sm border border-white/20">Featured Project</span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight">DepEd Learning Management System</h2>
+                        <p class="text-red-100 text-base md:text-lg mb-6 leading-relaxed">
+                            A centralized LMS built specifically for the DepEd Zamboanga City Division. This system streamlines educational workflows, resource distribution, and cross-department collaboration. 
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-2">
+                            <span class="px-3 py-1.5 bg-black/30 rounded-lg text-sm font-medium backdrop-blur-sm border border-white/10">Laravel</span>
+                            <span class="px-3 py-1.5 bg-black/30 rounded-lg text-sm font-medium backdrop-blur-sm border border-white/10">MySQL</span>
+                            <span class="px-3 py-1.5 bg-black/30 rounded-lg text-sm font-medium backdrop-blur-sm border border-white/10">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shrink-0 w-full md:w-auto flex justify-start md:justify-end mt-4 md:mt-0 z-10">
+                        <a href="https://github.com/jajames-22/lms_deped_zambo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-red-700 font-bold rounded-xl hover:bg-gray-50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl w-full md:w-auto">
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                            View Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 border-t border-gray-100 text-center text-gray-500 text-sm reveal">
+        &copy; 2026 James Benedict | DepEd Zamboanga City Division Intern. Built with HTML & Tailwind CSS.
+    </footer>
+
+    <script>
+        // Loading Screen Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            
+            // Only run the animation if the inline script didn't already hide the loader
+            if (loader && loader.style.display !== 'none') {
+                const hiText = document.getElementById('loader-hi');
+                const msgText = document.getElementById('loader-msg');
+                
+                setTimeout(() => hiText.classList.add('show'), 300);
+                
+                setTimeout(() => {
+                    hiText.classList.remove('show');
+                }, 1500);
+                
+                setTimeout(() => {
+                    msgText.classList.add('show');
+                }, 2000);
+                
+                setTimeout(() => {
+                    loader.style.transform = 'translateY(-100%)';
+                    document.body.classList.remove('overflow-hidden');
+                    setTimeout(() => loader.remove(), 800);
+                }, 3800);
+            }
+        });
+
+        // Scroll Progress Bar Logic
+        const progressBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (window.scrollY / scrollTotal) * 100;
+            progressBar.style.width = scrollProgress + '%';
+        });
+
+        // Scroll Reveal Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Search Functionality
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const articleCards = document.querySelectorAll('.article-card');
+
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            filterArticles();
+            if(window.scrollY < document.getElementById('articles').offsetTop - 100) {
+                window.scrollTo({
+                    top: document.getElementById('articles').offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        searchInput.addEventListener('input', filterArticles);
+
+        function filterArticles() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            articleCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const infoText = card.querySelector('.date-week-info').textContent.toLowerCase();
+                
+                // Matches Title, Date, or Week Number
+                if (title.includes(query) || infoText.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Header and Mobile Menu Logic
+        const header = document.getElementById('main-header');
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuPath = document.getElementById('menu-path');
+        const navMenu = document.getElementById('nav-menu');
+
+        let isMenuOpen = false;
+
+        function applyGlass() {
+            header.classList.remove('bg-transparent', 'border-transparent');
+            header.classList.add('bg-white/90', 'backdrop-blur-md', 'border-gray-200', 'shadow-sm');
+        }
+
+        function removeGlass() {
+            header.classList.add('bg-transparent', 'border-transparent');
+            header.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-gray-200', 'shadow-sm');
+        }
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('max-h-0', 'opacity-0');
+                mobileMenu.classList.add('max-h-[400px]', 'opacity-100');
+                menuPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                applyGlass();
+            } else {
+                mobileMenu.classList.remove('max-h-[400px]', 'opacity-100');
+                mobileMenu.classList.add('max-h-0', 'opacity-0');
+                menuPath.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+                if (window.scrollY <= 10) removeGlass();
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10 || isMenuOpen) {
+                applyGlass();
+                navMenu.classList.remove('my-3');
+            } else {
+                removeGlass();
+                navMenu.classList.add('my-3');
+            }
+        });
+
+        menuBtn.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>

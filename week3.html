@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 3 Progress: LMS Functionality & Security | JB Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { scroll-behavior: smooth; font-family: Poppins, sans-serif; }
+        
+        .article-text {
+            line-height: 1.8;
+            color: #374151;
+            font-size: 1.125rem;
+        }
+
+        /* Slide in from right to left */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Slide out from left to right */
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .animate-slide-in {
+            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-slide-out {
+            animation: slideOutRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+
+    <div id="page-wrapper" class="min-h-screen flex flex-col animate-slide-in">
+        
+        <header class="w-full border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
+            <div class="max-w-screen-md mx-auto px-6 h-16 flex items-center justify-between">
+                <button onclick="navigateBack()" class="text-emerald-700 font-bold flex items-center gap-2 hover:opacity-70 transition group px-2 py-1 rounded-lg hover:bg-emerald-50 relative z-10">
+                    <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                    Back to Home
+                </button>
+                <div class="text-sm font-bold text-gray-400 uppercase tracking-widest">Article</div>
+            </div>
+        </header>
+
+        <main class="flex-1 max-w-screen-md mx-auto px-6 py-12 md:py-20 w-full">
+            
+            <header class="mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                    Advancing LMS Functionality & Security
+                </h1>
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold">
+                        JB
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-sm font-bold text-gray-900">James Benedict</span>
+                        <span class="text-xs text-gray-500">March 10, 2026</span>
+                    </div>
+                    <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 3</span>
+                </div>
+            </header>
+
+            <div class="space-y-10">
+                
+                <div class="article-text whitespace-pre-line">
+                    During my third week, I shifted my focus toward the core administrative and student-facing functionalities of our Learning Management System. I successfully built the CRUD (Create, Read, Update, Delete) operations to manage schools, teachers, and students within the admin dashboard. This milestone was significant, as it allowed us to reach 30% overall project completion, providing a more stable architecture for the upcoming features.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week3/pic1.png" alt="Assessment Management View" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">New Assessment Management view in the admin dashboard.</figcaption>
+                </figure>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week3/pic2.png" alt="Assessment Management View" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Student Assessment View.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    A major priority this week was the Student Assessment Interface. I designed the question-and-answer layout and implemented a robust autosave feature to ensure student progress is synced in real-time, preventing data loss. During this development, I identified a critical security vulnerability: unauthorized students could bypass access controls by copy-pasting assessment URLs. To resolve this, I implemented Laravel middleware in the routing file to strictly enforce permission checks, ensuring that only students eligible for a specific exam can access its content.
+                </div>
+
+                <figure class="space-y-2">
+                    <div class="rounded-3xl overflow-hidden bg-gray-100 shadow-lg shadow-gray-100">
+                        <img src="pictures/week3/pic3.png" alt="Laravel Middleware Implementation" class="w-full h-auto object-cover">
+                    </div>
+                    <figcaption class="text-center text-xs text-gray-400 mt-2">Securing exam access with Laravel middleware.</figcaption>
+                </figure>
+
+                <div class="article-text whitespace-pre-line">
+                    This week provided deep insights into the necessity of data integrity in educational software. Learning how to properly secure routes has been a highlight of my professional growth, moving beyond just "making things work" to ensuring they are secure. As I look forward to next week, I plan to develop a comprehensive analytics dashboard to visualize student performance and streamline exam data management.
+                </div>
+
+            </div>
+
+            <footer class="mt-20 pt-10 border-t border-gray-100 flex flex-col items-center">
+                <p class="text-gray-400 text-sm mb-6 text-center">Thank you for reading! If you enjoyed this article, check out my other projects.</p>
+                <button onclick="navigateBack()" class="px-8 py-3 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition shadow-lg shadow-emerald-100">
+                    Explore More Articles
+                </button>
+            </footer>
+        </main>
+
+        <footer class="py-10 text-center text-gray-400 text-xs mt-auto">
+            &copy; 2026 JB Portfolio. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        function navigateBack() {
+            const wrapper = document.getElementById('page-wrapper');
+
+            wrapper.classList.remove('animate-slide-in');
+            wrapper.classList.add('animate-slide-out');
+
+            setTimeout(() => {
+                window.location.href = "javascript:history.back()";
+            }, 300); // Matches the slideOutRight animation duration
+        }
+    </script>
+</body>
+</html>
