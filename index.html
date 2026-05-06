@@ -21,6 +21,12 @@
             -webkit-box-orient: vertical;  
             overflow: hidden;
         }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
         
         /* Infinite Floating Animation */
         @keyframes float {
@@ -64,9 +70,85 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Moving Background Grid Overlay */
+        .bg-animated-grid {
+            position: fixed;
+            inset: 0;
+            z-index: 5; /* Changed to place behind content */
+            pointer-events: none; 
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: moveGrid 15s linear infinite;
+            mask-image: radial-gradient(ellipse at top, black 0%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 0%, transparent 80%);
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 60px 60px; }
+        }
+
+        /* Curvy Wavy Background */
+        .bg-curves {
+            position: fixed;
+            inset: 0;
+            z-index: 0; /* Changed to sit at the very back */
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.7;
+        }
+        
+        .curve-line {
+            position: absolute;
+            width: 500vw; 
+            height: 100vh;
+            fill: none;
+            stroke-width: 2px;
+        }
+        
+        .curve-1 {
+            stroke: rgba(16, 185, 129, 0.15); 
+            top: -10%;
+            animation: waveSlide 25s linear infinite;
+        }
+        
+        .curve-2 {
+            stroke: rgba(20, 184, 166, 0.15);
+            stroke-width: 3px;
+            top: 20%;
+            animation: waveSlide 35s linear infinite reverse;
+        }
+
+        .curve-3 {
+            stroke: rgba(52, 211, 153, 0.15); 
+            top: 45%;
+            animation: waveSlide 30s linear infinite;
+        }
+
+        @keyframes waveSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
-<body class="bg-white overflow-hidden">
+<body class="bg-white overflow-hidden relative">
+
+    <div class="bg-animated-grid"></div>
+
+    <div class="bg-curves">
+        <svg class="curve-line curve-1" viewBox="0 0 2000 600" preserveAspectRatio="none">
+            <path d="M 0 300 Q 125 450, 250 300 T 500 300 T 750 300 T 1000 300 T 1250 300 T 1500 300 T 1750 300 T 2000 300"></path>
+        </svg>
+        <svg class="curve-line curve-2" viewBox="0 0 2000 600" preserveAspectRatio="none">
+            <path d="M 0 300 Q 62.5 500, 125 300 T 250 300 T 375 300 T 500 300 T 625 300 T 750 300 T 875 300 T 1000 300 T 1125 300 T 1250 300 T 1375 300 T 1500 300 T 1625 300 T 1750 300 T 1875 300 T 2000 300"></path>
+        </svg>
+        <svg class="curve-line curve-3" viewBox="0 0 2000 600" preserveAspectRatio="none">
+            <path d="M 0 300 Q 125 150, 250 300 T 500 300 T 750 300 T 1000 300 T 1250 300 T 1500 300 T 1750 300 T 2000 300"></path>
+        </svg>
+    </div>
 
     <div id="loader" class="fixed inset-0 z-[100] bg-emerald-500 flex flex-col justify-center items-center text-white">
         <h1 id="loader-hi" class="fade-text text-6xl font-bold ">Hi!</h1>
@@ -93,6 +175,7 @@
 
             <ul class="hidden md:flex space-x-8 text-gray-600 font-medium">
                 <li><a href="#" class="hover:text-emerald-600 transition">Home</a></li>
+                <li><a href="#about" class="hover:text-emerald-600 transition">About</a></li>
                 <li><a href="#articles" class="hover:text-emerald-600 transition">Journey</a></li>
                 <li><a href="#projects" class="hover:text-emerald-600 transition">Projects</a></li>
             </ul>
@@ -107,14 +190,15 @@
         <div id="mobile-menu" class="md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out border-b border-white/20 bg-white/90 backdrop-blur-md">
             <div class="px-6 py-8 space-y-4 pt-0 mt-4">
                 <a href="#" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">Home</a>
+                <a href="#about" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">About</a>
                 <a href="#articles" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">Journey</a>
                 <a href="#projects" class="block text-gray-800 hover:text-emerald-600 font-semibold transition">Projects</a>
             </div>
         </div>
     </header>
 
-    <main>
-        <section class="pt-26 pb-16 px-10 sm:px-16 bg-linear-to-b from-emerald-50 to-white overflow-hidden min-h-screen flex items-center">
+    <main class="relative z-10">
+        <section class="pt-26 pb-16 px-10 sm:px-16 bg-gradient-to-b from-emerald-50/80 to-transparent overflow-hidden min-h-screen flex items-center">
             <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
                 
                 <div class="text-left z-10 reveal">
@@ -126,7 +210,7 @@
                         <span class="text-emerald-600">Internship Journey</span>
                     </h1>
                     <p class="text-base sm:text-lg text-gray-600 max-w-xl mb-8 md:mb-10 leading-relaxed">
-                        Hi, I'm JB. Welcome to my portfolio documenting my IT internship experience at the Department of Education - Zamboanga City Division. Here, I share the systems I've helped build, challenges I've solved, and my overall growth as a developer.
+                        Hi, I'm JB. Welcome to my portfolio documenting my internship experience at the Department of Education - Zamboanga City Division. Here, I share the systems I've helped build, challenges I've solved, and my overall growth as a developer.
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4">
@@ -134,10 +218,10 @@
                             View My Work
                         </a>
                         
-                        <form id="search-form" class="flex flex-col sm:flex-row w-full sm:w-auto shadow-sm sm:shadow-none rounded-xl overflow-hidden">
+                        <form id="search-form" class="flex flex-row w-full sm:w-auto shadow-sm sm:shadow-none rounded-xl overflow-hidden">
                             <input type="text" id="search-input" name="search" 
                                 placeholder="Search logs..." 
-                                class="px-6 py-4 bg-white border border-gray-200 text-gray-700 sm:rounded-l-xl sm:rounded-tr-none font-medium focus:ring-1 focus:ring-emerald-500 outline-none transition w-full sm:w-48 border-b-0 sm:border-b sm:border-r-0">
+                                class="px-6 py-4 bg-white/90 border border-gray-200 text-gray-700 sm:rounded-l-xl sm:rounded-tr-none font-medium focus:ring-1 focus:ring-emerald-500 outline-none transition w-full sm:w-48 border-b-0 sm:border-b sm:border-r-0">
                             <button type="submit" class="px-6 py-4 bg-emerald-600 text-white sm:rounded-r-xl sm:rounded-bl-none font-bold hover:bg-emerald-700 transition">
                                 Search
                             </button>
@@ -151,14 +235,14 @@
                     
                     <div class="absolute top-0 right-0 md:right-12 w-40 h-56 sm:w-48 sm:h-64 md:w-64 md:h-80 rounded-2xl shadow-2xl border-4 border-white z-10 animate-float transition-transform duration-500 hover:z-30 group cursor-pointer">
                         <div class="w-full h-full overflow-hidden rounded-xl rotate-6 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300">
-                            <img src="pictures/using-laptop.jpg" alt="Working on code" class="w-full h-full object-cover">
+                            <img src="pictures/using-laptop.jpg" alt="Working on code" class="w-full h-full object-cover bg-gray-200">
                             <div class="absolute inset-0 bg-emerald-900/20 group-hover:bg-transparent transition duration-300"></div>
                         </div>
                     </div>
 
                     <div class="absolute bottom-0 left-0 md:left-12 w-40 h-56 sm:w-48 sm:h-64 md:w-64 md:h-80 rounded-2xl shadow-2xl border-4 border-white z-20 animate-float-delayed transition-transform duration-500 hover:z-30 group cursor-pointer">
                         <div class="w-full h-full overflow-hidden rounded-xl -rotate-6 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300">
-                            <img src="pictures/rojas_pic.jpg" alt="Office environment" class="w-full h-full object-cover">
+                            <img src="pictures/rojas_pic.jpg" alt="Office environment" class="w-full h-full object-cover bg-gray-200">
                             <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-transparent transition duration-300"></div>
                         </div>
                     </div>
@@ -169,10 +253,131 @@
             </div>
         </section>
 
-        <section id="articles" class="py-16 px-6 max-w-7xl mx-auto">
+        <section id="about" class="py-16 px-6 md:pt-22 max-w-7xl mx-auto relative z-10">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4 reveal">
                 <div>
-                    <h2 class="text-3xl pt-5 font-bold text-gray-900 mb-2">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">
+                        About Me
+                    </h2>
+                    <p class="text-gray-500">Personal background and technical competencies.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="col-span-1 bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-sm border border-gray-100 reveal">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm rotate-3">
+                        <img src="pictures/rojas_pic.jpg" alt="James Benedict A. Rojas" class="w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">James Benedict A. Rojas</h3>
+                    <p class="text-emerald-600 font-medium mb-6 text-sm">BS Computer Science (2nd Year)</p>
+                    
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                            <span>Western Mindanao State University</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span>rojasjamesbenedict@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 bg-gradient-to-br from-emerald-50/80 to-teal-50/80 backdrop-blur-md p-8 rounded-3xl shadow-sm border border-emerald-100 reveal" style="transition-delay: 100ms;">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Technical Skills</h3>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-sm border border-emerald-50 hover:shadow-md transition">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" class="w-5 h-5">
+                                    <span class="font-bold text-gray-800 text-sm tracking-wide">C++</span>
+                                </div>
+                                <span class="text-emerald-600 font-bold text-sm">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-sm border border-emerald-50 hover:shadow-md transition">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-1.5">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML" class="w-5 h-5 relative z-30">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS" class="w-5 h-5 relative z-20">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JS" class="w-5 h-5 relative z-10">
+                                    </div>
+                                    <span class="font-bold text-gray-800 text-sm tracking-wide ml-1">HTML, CSS, JS</span>
+                                </div>
+                                <span class="text-emerald-600 font-bold text-sm">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-sm border border-emerald-50 hover:shadow-md transition">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="PHP" class="w-5 h-5">
+                                    <span class="font-bold text-gray-800 text-sm tracking-wide">PHP</span>
+                                </div>
+                                <span class="text-emerald-600 font-bold text-sm">60%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-sm border border-emerald-50 hover:shadow-md transition">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" class="w-5 h-5">
+                                    <span class="font-bold text-gray-800 text-sm tracking-wide">Python</span>
+                                </div>
+                                <span class="text-emerald-600 font-bold text-sm">56%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 56%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-sm border border-emerald-50 hover:shadow-md transition">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="Laravel" class="w-5 h-5">
+                                    <span class="font-bold text-gray-800 text-sm tracking-wide">Laravel</span>
+                                </div>
+                                <span class="text-emerald-600 font-bold text-sm">55%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 55%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/90 p-5 rounded-2xl shadow-sm border border-emerald-50 hover:shadow-md transition">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django" class="w-5 h-5">
+                                    <span class="font-bold text-gray-800 text-sm tracking-wide">Django</span>
+                                </div>
+                                <span class="text-emerald-600 font-bold text-sm">55%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full transition-all duration-1000" style="width: 55%"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="articles" class="py-16 px-6 md:pt-22 max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4 reveal">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">
                         Internship Logs
                     </h2>
                     <p class="text-gray-500">Weekly reports, insights, and milestones at DepEd.</p>
@@ -180,211 +385,141 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="articles-grid">
-                <a href="week1.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                <a href="week1.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week1/pic1.jpg" alt="">
+                            <img src="pictures/week1/pic1.jpg" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        DepEd Zambo welcomed us; we got recruited.
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        The first week of my internship at the Department of Education – Zamboanga City Division has been an incredible start. Stepping into the ICT Unit, I was immediately immersed in a mission-critical project: developing a centralized Learning Management System (LMS) for the division to facilitate the distribution of accessible learning materials.
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">DepEd Zambo welcomed us; we got recruited.</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">The first week of my internship at the Department of Education – Zamboanga City Division has been an incredible start...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Feb 19, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 1</span>
                     </div>
                 </a>
 
-                <a href="week2.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 100ms;">
+                <a href="week2.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col" style="transition-delay: 100ms;">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week2/pic2.png" alt="">
+                            <img src="pictures/week2/pic2.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Database Migration & Role-Based Access
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        The second week of my internship was pivotal for our Learning Management System (LMS) development. We shifted our focus from initial prototyping...
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Database Migration & Role-Based Access</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">The second week of my internship was pivotal for our Learning Management System (LMS) development...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Mar 3, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 2</span>
                     </div>
                 </a>
 
-                <a href="week3.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 200ms;">
+                <a href="week3.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col" style="transition-delay: 200ms;">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week3/pic1.png" alt="">
+                            <img src="pictures/week3/pic1.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Advancing LMS Functionality & Security
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        During my third week, I shifted my focus toward the core administrative and student-facing functionalities of our Learning Management System...
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Advancing LMS Functionality & Security</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">During my third week, I shifted my focus toward the core administrative and student-facing functionalities...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Mar 10, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 3</span>
                     </div>
                 </a>
 
-                <a href="week4.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                <a href="week4.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week4/pic1.png" alt="">
+                            <img src="pictures/week4/pic1.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Refining Student Experience & Assessment Analytics
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        During the fourth week of my internship, we achieved a significant milestone, reaching 40% completion of the Learning Management System (LMS) project. My primary focus was on refining the student-facing modules. I designed the Explore Page template and implemented critical optimizations to our Computer-Based Assessment (CBA) system. 
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Refining Student Experience & Assessment Analytics</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">During the fourth week of my internship, we achieved a significant milestone, reaching 40% completion...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Mar 17, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 4</span>
                     </div>
                 </a>
 
-                <a href="week5.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 100ms;">
+                <a href="week5.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col" style="transition-delay: 100ms;">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week5/pic2.png" alt="">
+                            <img src="pictures/week5/pic2.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Advancing LMS Security & System Flexibility
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                         Week 5 marked a major milestone as our project reached 50% completion. My focus during this period was enhancing the security and flexibility of the Learning Management System (LMS). We successfully integrated a "3-chance pause" feature for assessment exams.
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Advancing LMS Security & System Flexibility</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">Week 5 marked a major milestone as our project reached 50% completion. My focus during this period...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Mar 24, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 5</span>
                     </div>
                 </a>
 
-                <a href="week6.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 200ms;">
+                <a href="week6.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col" style="transition-delay: 200ms;">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week6/pic1.png" alt="">
+                            <img src="pictures/week6/pic1.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Finalizing Educational Experience & Admin Controls
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        This week, we achieved a significant 65% completion milestone for our LMS project. My primary focus was finalizing the core educational flow within the Study Module. I ensured a seamless transition for students between content sections, 
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Finalizing Educational Experience & Admin Controls</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">This week, we achieved a significant 65% completion milestone for our LMS project...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Mar 31, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 6</span>
                     </div>
                 </a>
 
-                <a href="week7.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                <a href="week7.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week7/pic1.png" alt="">
+                            <img src="pictures/week7/pic1.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Dynamic Criteria Builder & Notification System
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        During the seventh week of my internship, we reached a significant milestone: 75% completion of the Learning Management System. My efforts were primarily dedicated to reinforcing our backend architecture by introducing intelligent, automated features.
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Dynamic Criteria Builder & Notification System</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">During the seventh week of my internship, we reached a significant milestone: 75% completion...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Apr 7, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 7</span>
                     </div>
                 </a>
 
-                <a href="week8.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 100ms;">
+                <a href="week8.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col" style="transition-delay: 100ms;">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week8/pic1.png" alt="">
+                            <img src="pictures/week8/pic1.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Administrative Integration & Final Review
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        During Week 8, we focused heavily on organizational restructuring and refining the user experience of the Learning Management System (LMS)...
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Administrative Integration & Final Review</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">During Week 8, we focused heavily on organizational restructuring and refining the user experience...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Apr 14, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 8</span>
                     </div>
                 </a>
 
-                <a href="week9.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col" style="transition-delay: 200ms;">
+                <a href="week9.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col" style="transition-delay: 200ms;">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week9/pic1.png" alt="">
+                            <img src="pictures/week9/pic1.png" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Platform Refinement & System Polish
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        During Week 9, we shifted our focus from feature expansion to system refinement and stability. While our formal presentation to the ITO...
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Platform Refinement & System Polish</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">During Week 9, we shifted our focus from feature expansion to system refinement and stability...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Apr 21, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 9</span>
                     </div>
                 </a>
 
-                <a href="week10.html" class="article-card reveal group block h-full p-5 shadow-md rounded-2xl hover:shadow-lg hover:-translate-y-1 transition bg-white border border-gray-50 flex flex-col">
+                <a href="week10.html" class="article-card reveal group block h-full p-5 shadow-sm border border-gray-100 rounded-2xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white/80 backdrop-blur-md flex flex-col">
                     <div class="overflow-hidden rounded-xl mb-4 bg-gray-100 aspect-video relative shadow-sm shrink-0">
                         <div class="w-full h-full bg-emerald-50 flex items-center justify-center text-emerald-200">
-                            <img src="pictures/week10/pic2.jpg" alt="">
+                            <img src="pictures/week10/pic2.jpg" alt="" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">
-                        Formal System Evaluation & Presentation
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">
-                        Week 10 was undoubtedly the highlight of my internship. We held our formal system presentation at the Curriculum Implementation Division...
-                    </p>
-                    
-                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-2 border-t border-gray-50 date-week-info">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition line-clamp-2">Formal System Evaluation & Presentation</h3>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 flex-grow">Week 10 was undoubtedly the highlight of my internship. We held our formal system presentation...</p>
+                    <div class="flex items-center justify-between w-full text-xs text-gray-400 font-medium mt-auto pt-4 border-t border-gray-50 date-week-info">
                         <span>Apr 28, 2026</span>
                         <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Week 10</span>
                     </div>
@@ -393,52 +528,93 @@
             </div>
         </section>
 
-        <section id="projects" class="py-12 px-6 max-w-7xl mx-auto mb-16">
+        <section id="projects" class="py-16 px-6 md:pt-22 max-w-7xl mx-auto mb-16 relative z-10">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4 reveal">
                 <div>
-                    <h2 class="text-3xl pt-10 font-bold text-gray-900 mb-2">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">
                         Project Repository
                     </h2>
-                    <p class="text-gray-500">Repository link for DepEd LMS.</p>
+                    <p class="text-gray-500">Key systems, applications, and models I've developed.</p>
                 </div>
             </div>
 
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-600 to-red-800 text-white shadow-2xl shadow-red-900/20 group reveal" style="transition-delay: 150ms;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <div class="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none transition-transform duration-700 group-hover:scale-150"></div>
-                <div class="absolute bottom-0 left-0 -mb-16 -ml-16 w-64 h-64 bg-black/10 rounded-full blur-3xl pointer-events-none"></div>
-                
-                <div class="relative p-8 md:p-12 lg:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12">
-                    <div class="max-w-2xl">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-sm border border-white/20">Featured Project</span>
-                        </div>
-                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight">DepEd Learning Management System</h2>
-                        <p class="text-red-100 text-base md:text-lg mb-6 leading-relaxed">
-                            A centralized LMS built specifically for the DepEd Zamboanga City Division. This system streamlines educational workflows, resource distribution, and cross-department collaboration. 
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-2">
-                            <span class="px-3 py-1.5 bg-black/30 rounded-lg text-sm font-medium backdrop-blur-sm border border-white/10">Laravel</span>
-                            <span class="px-3 py-1.5 bg-black/30 rounded-lg text-sm font-medium backdrop-blur-sm border border-white/10">MySQL</span>
-                            <span class="px-3 py-1.5 bg-black/30 rounded-lg text-sm font-medium backdrop-blur-sm border border-white/10">Tailwind CSS</span>
-                        </div>
-                    </div>
+                <div class="relative overflow-hidden rounded-2xl aspect-[3/4] group reveal shadow-lg bg-red-900">
+                    <img src="pictures/using-laptop.jpg" alt="DepEd LMS" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100 bg-gray-800">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
                     
-                    <div class="shrink-0 w-full md:w-auto flex justify-start md:justify-end mt-4 md:mt-0 z-10">
-                        <a href="https://github.com/jajames-22/lms_deped_zambo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-red-700 font-bold rounded-xl hover:bg-gray-50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl w-full md:w-auto">
-                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
-                            </svg>
-                            View Repository
-                        </a>
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            <div class="mb-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <span class="px-2 py-1 bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Laravel</span>
+                                <span class="px-2 py-1 bg-blue-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">MySQL</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">DepEd Learning Management System</h3>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                <p class="text-gray-300 text-sm mb-4 line-clamp-3">
+                                    A centralized LMS built specifically for the DepEd Zamboanga City Division. Streamlines workflows, resources, and cross-department collaboration.
+                                </p>
+                                <a href="https://github.com/jajames-22/lms_deped_zambo" target="_blank" class="text-emerald-400 font-semibold text-sm hover:text-emerald-300 inline-flex items-center gap-1">
+                                    View Repository &rarr;
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="relative overflow-hidden rounded-2xl aspect-[3/4] group reveal shadow-lg bg-indigo-900" style="transition-delay: 100ms;">
+                    <img src="pictures/coursesyl.png" alt="WMSU Syllabus System" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100 bg-indigo-900">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-indigo-950/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
+                    
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            <div class="mb-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <span class="px-2 py-1 bg-yellow-500/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Web</span>
+                                <span class="px-2 py-1 bg-gray-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">System</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">WMSU Course Syllabus System</h3>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                <p class="text-gray-300 text-sm mb-4 line-clamp-3">
+                                    A centralized platform developed for Western Mindanao State University to efficiently manage, organize, and distribute academic course syllabi.
+                                </p>
+                                <a href="https://github.com/jajames-22/courseSyllabus" target="_blank" class="text-emerald-400 font-semibold text-sm hover:text-emerald-300 inline-flex items-center gap-1">
+                                    View Repository &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-2xl aspect-[3/4] group reveal shadow-lg bg-teal-900" style="transition-delay: 200ms;">
+                    <img src="pictures/sorty.jpg" alt="Sorty App" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100 bg-teal-900">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-teal-950/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
+                    
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            <div class="mb-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                <span class="px-2 py-1 bg-cyan-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Android</span>
+                                <span class="px-2 py-1 bg-purple-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Mobile app</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">Sorty</h3>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                <p class="text-gray-300 text-sm mb-4 line-clamp-3">
+                                    An Android application designed to automatically sort and organize lecture files, including Word documents, PowerPoints, and PDFs for streamlined studying.
+                                </p>
+                                <a href="https://github.com/jajames-22/Sorty" target="_blank" class="text-emerald-400 font-semibold text-sm hover:text-emerald-300 inline-flex items-center gap-1">
+                                    View Repository &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
 
-    <footer class="py-10 border-t border-gray-100 text-center text-gray-500 text-sm reveal">
-        &copy; 2026 James Benedict | DepEd Zamboanga City Division Intern. Built with HTML & Tailwind CSS.
+    <footer class="py-10 border-t border-gray-100 text-center text-gray-500 text-sm reveal relative z-10">
+        &copy; 2026 James Benedict | Built with HTML & Tailwind CSS.
     </footer>
 
     <script>
@@ -446,7 +622,6 @@
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             
-            // Only run the animation if the inline script didn't already hide the loader
             if (loader && loader.style.display !== 'none') {
                 const hiText = document.getElementById('loader-hi');
                 const msgText = document.getElementById('loader-msg');
@@ -517,7 +692,6 @@
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 const infoText = card.querySelector('.date-week-info').textContent.toLowerCase();
                 
-                // Matches Title, Date, or Week Number
                 if (title.includes(query) || infoText.includes(query)) {
                     card.style.display = 'flex';
                 } else {
