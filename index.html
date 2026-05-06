@@ -545,13 +545,13 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
                     
                     <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <div class="transform translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                            <div class="mb-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        <div class="transform translate-y-0 md:translate-y-16 md:group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            <div class="mb-3 flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                 <span class="px-2 py-1 bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Laravel</span>
                                 <span class="px-2 py-1 bg-blue-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">MySQL</span>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">DepEd Learning Management System</h3>
-                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                            <div class="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
                                 <p class="text-gray-300 text-sm mb-4 line-clamp-3">
                                     A centralized LMS built specifically for the DepEd Zamboanga City Division. Streamlines workflows, resources, and cross-department collaboration.
                                 </p>
@@ -568,13 +568,13 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-indigo-950/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
                     
                     <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <div class="transform translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                            <div class="mb-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        <div class="transform translate-y-0 md:translate-y-16 md:group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            <div class="mb-3 flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                 <span class="px-2 py-1 bg-yellow-500/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Web</span>
                                 <span class="px-2 py-1 bg-gray-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">System</span>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">WMSU Course Syllabus System</h3>
-                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                            <div class="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
                                 <p class="text-gray-300 text-sm mb-4 line-clamp-3">
                                     A centralized platform developed for Western Mindanao State University to efficiently manage, organize, and distribute academic course syllabi.
                                 </p>
@@ -591,13 +591,13 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-teal-950/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-300"></div>
                     
                     <div class="absolute inset-0 p-6 flex flex-col justify-end">
-                        <div class="transform translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                            <div class="mb-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                        <div class="transform translate-y-0 md:translate-y-16 md:group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                            <div class="mb-3 flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                 <span class="px-2 py-1 bg-cyan-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Android</span>
                                 <span class="px-2 py-1 bg-purple-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">Mobile app</span>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">Sorty</h3>
-                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                            <div class="opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
                                 <p class="text-gray-300 text-sm mb-4 line-clamp-3">
                                     An Android application designed to automatically sort and organize lecture files, including Word documents, PowerPoints, and PDFs for streamlined studying.
                                 </p>
@@ -745,6 +745,14 @@
         });
 
         menuBtn.addEventListener('click', toggleMenu);
+
+        // Close mobile menu when a navigation link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) toggleMenu();
+            });
+        });
     </script>
 </body>
 </html>
